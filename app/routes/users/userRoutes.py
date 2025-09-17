@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.controllers.users.userController import register
 from app.models.db.dbModel import Users
 from sqlmodel import Session

@@ -1,4 +1,4 @@
-# Crear entorno virtual
+ur# Crear entorno virtual
 python -m venv venv --> crear entorno virtual
 
 ## En Linux/macOS:
