@@ -7,12 +7,16 @@ class EstadoReserva(str, Enum):
     aceptada = "aceptada"
     rechazada = "rechazada"
 
-class Users(SQLModel, table=True):
+class Roles(int, Enum):
+    admin = 1
+    usuario = 0
+
+class Usuarios(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     nombre: str
     email: str
     contrasena: str
-    rol: bool
+    rol: int = Field(default=Roles.usuario.value)
 
 class Salas(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)

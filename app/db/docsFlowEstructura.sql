@@ -10,7 +10,7 @@ CREATE TABLE Usuarios (
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
-    rol BOOL NOT NULL
+    rol INT NOT NULL
 ) ENGINE=InnoDB;
 
 -- ========================
