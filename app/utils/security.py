@@ -1,7 +1,12 @@
 from passlib.context import CryptContext
 
 # Create a CryptContext for hashing passwords using bcrypt
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Using bcrypt with explicit configuration to avoid version issues
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto",
+    bcrypt__rounds=12,
+)
 
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)

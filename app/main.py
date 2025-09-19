@@ -13,8 +13,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# app.include_router(auth_router, prefix="/api/auth")
+# Include user routes (includes register and JSON login)
 app.include_router(users_router, prefix="/user")
+# Include auth routes (OAuth2 form login)
 app.include_router(auth_router, prefix="/auth")
 
 

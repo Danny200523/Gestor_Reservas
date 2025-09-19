@@ -8,10 +8,10 @@ from app.auth.jwt import create_access_token
 from app.auth.deps import get_current_user
 from app.utils.security import verify_password
 
-router = APIRouter(prefix="/user")
+router = APIRouter()
 
-@router.post("/login", response_model=TokenOut)
-def login(form_data: OAuth2PasswordRequestForm = Depends(), session: Session = Depends(get_session)):
+@router.post("/token", response_model=TokenOut)
+def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), session: Session = Depends(get_session)):
     print(f"Login attempt with username: {form_data.username}, password: {form_data.password}")
     usuario = session.exec(select(Usuarios).where(Usuarios.email == form_data.username.lower())).first()
     if not usuario:

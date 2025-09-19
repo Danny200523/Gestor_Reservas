@@ -1,9 +1,9 @@
 import os
 from datetime import timedelta
 
-JWT_SECRET = os.getenv("JWT_SECRET", "defaultsecret")
-JWT_ALG = os.getenv("JWT_ALG", "HS256")
-JWT_EXPIRE_STR = os.getenv("JWT_EXPIRE", "1h")  # Default to 1h
+JWT_SECRET = os.getenv("jwt_secret", "defaultsecret")
+JWT_ALG = os.getenv("jwt_alg", "HS256")
+JWT_EXPIRE_STR = os.getenv("jwt_expire", "1h")  # Default to 1h
 
 def parse_expire(expire_str: str) -> timedelta:
     if expire_str.endswith('h'):

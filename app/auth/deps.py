@@ -5,7 +5,7 @@ from app.db.db import get_session
 from app.models.db.dbModel import Usuarios
 from app.auth.jwt import verify_token
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/user/login", auto_error=True)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token", auto_error=True)
 
 def get_current_user(
     token: str = Depends(oauth2_scheme),

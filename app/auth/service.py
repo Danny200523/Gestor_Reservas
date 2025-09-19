@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class LoginIn(BaseModel):
-    username: str
+    email: str
     password: str
 
 class TokenOut(BaseModel):
