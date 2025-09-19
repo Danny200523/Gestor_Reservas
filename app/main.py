@@ -3,6 +3,21 @@ from app.routes.users.userRoutes import router as users_router
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes.auth.authRoutes import router as auth_router
 
+''' 
+
+
+    ####################################################################
+    # Base de datos trabajada desde un cluster(nube) todo desde el .env#
+    ####################################################################
+
+    ####################################################################
+    #                  COMANDO PARA INICIAR EL API                     #
+    #   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000       #
+    ####################################################################
+
+
+'''
+
 app = FastAPI()
 
 app.add_middleware(
@@ -15,12 +30,11 @@ app.add_middleware(
 
 # Include user routes (includes register and JSON login)
 app.include_router(users_router, prefix="/user")
-# Include auth routes (OAuth2 form login)
 app.include_router(auth_router, prefix="/auth")
+
 
 
 @app.get("/")
 def health_check():
     return {"status": "ok"}
-
 

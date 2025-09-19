@@ -9,6 +9,8 @@ from fastapi import HTTPException
 from sqlmodel import select
 
 def createUser(db: Session, body):
+    if not body:
+        raise print("Data Incompleta")
     hashed_pass = hash_password(body.password)
     newUser = Usuarios(
         nombre=body.nombre,
@@ -21,7 +23,20 @@ def createUser(db: Session, body):
     db.refresh(newUser)
     return newUser
 
+def deleteUser(db: Session, id):
+    if not id:
+        raise print("Data Incompleta")
+    statement = select(Usuarios).where(Usuarios.id == id)
+    user = db.exec(statement).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    db.delete(user)
+    db.commit()
+    return {"message": "Usuario eliminado exitosamente"}
+
 def login(body: LoginIn, session: Session) -> TokenOut:
+    if not body:
+        raise print("Data Incompleta")
     user = session.exec(select(Usuarios).where(Usuarios.email == body.email)).first()
     if not user:
         raise HTTPException(status_code=400, detail="Credenciales inválidas")

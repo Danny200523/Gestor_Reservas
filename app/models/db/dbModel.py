@@ -1,6 +1,7 @@
 from sqlmodel import SQLModel, Field
 from typing import Optional
 from enum import Enum
+from pydantic import BaseModel, EmailStr, constr, validator
 
 class EstadoReserva(str, Enum):
     pendiente = "pendiente"
@@ -33,3 +34,14 @@ class Reservas(SQLModel, table=True):
     hora_inicio: str
     hora_fin: str
     estado: EstadoReserva = Field(default=EstadoReserva.pendiente)
+
+class UserCreate(BaseModel):
+    nombre: constr(min_length=1)
+    email: EmailStr
+    password: constr(min_length=6)
+    rol: int = 0
+    @validator('rol')
+    def role_must_be_valid(cls, v):
+        if v not in (0, 1):
+            raise ValueError('rol must be 0 or 1')
+        return v
