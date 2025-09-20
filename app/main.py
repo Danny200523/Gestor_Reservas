@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.routes.users.userRoutes import router as users_router
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes.auth.authRoutes import router as auth_router
+from app.routes.reservas.reservaRoutes import router as reservas_router
 
 ''' 
 
@@ -31,6 +32,7 @@ app.add_middleware(
 # Include user routes (includes register and JSON login)
 app.include_router(users_router, prefix="/user")
 app.include_router(auth_router, prefix="/auth")
+app.include_router(reservas_router, prefix="/reservas")
 
 
 
